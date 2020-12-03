@@ -1,0 +1,3 @@
+#!/bin/bash
+
+LD_LIBRARY_PATH=/home/drodri/webapps/fondos_app/apache2/lib:/home/drodri/webapps/fondos_app/lib /home/drodri/webapps/fondos_app/apache2/bin/httpd.worker -f /home/drodri/webapps/fondos_app/apache2/conf/httpd.conf -k stop

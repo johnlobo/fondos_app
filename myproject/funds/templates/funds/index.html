@@ -1,0 +1,120 @@
+<html class="loading">
+<head>
+<title>Cotización de Fondos</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+html {
+    -webkit-transition: background-color 1s;
+    transition: background-color 1s;
+}
+html, body {
+    /* For the loading indicator to be vertically centered ensure */
+    /* the html and body elements take up the full viewport */
+    min-height: 100%;
+}
+html.loading {
+    /* Replace #333 with the background-color of your choice */
+    /* Replace loading.gif with the loading image of your choice */
+    background: #fff url('https://i0.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif?zoom=2&resize=48%2C48') no-repeat 50% 50%;
+
+    /* Ensures that the transition only runs in one direction */
+    -webkit-transition: background-color 0;
+    transition: background-color 0;
+}
+body {
+    -webkit-transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
+    font-family: "verdana";
+}
+html.loading body {
+    /* Make the contents of the body opaque during loading */
+    opacity: 0;
+
+    /* Ensures that the transition only runs in one direction */
+    -webkit-transition: opacity 0;
+    transition: opacity 0;
+}
+table {
+    border-collapse: collapse;
+    width:100%;
+}
+
+td {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.ver{ 
+    font-size: 70%;    
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+   background-color: #4CAF50;
+   color: white;
+   padding: 8px;
+   font-size: 18px;
+   text-align: "center";
+   }
+
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+</head>
+
+<body onload="showPage()" style="margin:0;">
+
+<script>
+function showPage() {
+    // IE10+
+    document.getElementsByTagName( "html" )[0].classList.remove( "loading" );
+
+    // All browsers
+    document.getElementsByTagName( "html" )[0].className.replace( /loading/, "" );
+}
+</script>
+<div class="container">
+<div class="well col-md-12">
+    <div class="col-md-9">
+        <h2>Cotización de Fondos</h2>
+    </div>
+    <div class="col-md-3 center-block">
+        <a class="btn btn-lg btn-primary" href="/admin/">admin</a>
+    </div>
+</div>
+<table>
+<tr>
+<th>FONDO</th>
+<th>ISIN</th>
+<th>FECHA</th>
+<th>VALOR</th>
+<th>HISTÓRICO</th>
+</tr>
+{% if funds_list_processed %}
+    {% for fund in funds_list_processed %}
+    <tr>
+        <td align"left"> {{ fund.0 }} </td>
+        <td align="center"> {{ fund.1 }} </td>
+        <td class="ver" >{{ fund.3 }}</td>
+        <td align="right"> {{ fund.2 }}</td>
+        <td align="center" class="ver"><a href="{{ fund.4 }}" target = "_blank">ver</a></td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <tr><td colspan="5">No funds are available.</td></tr>
+{% endif %}
+    </table>
+</div>
+    </body>
+    </html>
